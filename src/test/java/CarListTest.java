@@ -1,7 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CarListTest {
 
@@ -59,5 +61,30 @@ public class CarListTest {
     public void methodGetReturnsRightValue() {
         Car car = carList.get(0);
         assertEquals("BMW0", car.getModel());
+    }
+
+
+    @Test
+    public void insertIntoMiddlePosition() {
+        Car car = new Car("Audi", 1);
+        carList.add(car, 50);
+        Car carFromList = carList.get(50);
+        assertEquals("Audi", carFromList.getModel());
+    }
+
+    @Test
+    public void insertIntoFirstPosition() {
+        Car car = new Car("Audi", 1);
+        carList.add(car, 0);
+        Car carFromList = carList.get(0);
+        assertEquals("Audi", carFromList.getModel());
+    }
+
+    @Test
+    public void insertIntoLastPosition() {
+        Car car = new Car("Audi", 1);
+        carList.add(car, 100);
+        Car carFromList = carList.get(100);
+        assertEquals("Audi", carFromList.getModel());
     }
 }
