@@ -13,7 +13,7 @@ public class CarArrayList implements CarList {
     }
 
     @Override
-    public void add(Car car) {
+    public boolean add(Car car) {
         increaseArray();
 //            Car [] newCars = new Car[cars.length * 2];
 //
@@ -24,6 +24,7 @@ public class CarArrayList implements CarList {
 
         cars[size] = car;
         size++;
+        return true;
     }
 
     /**
@@ -38,7 +39,7 @@ public class CarArrayList implements CarList {
      * элементы, пятый - длинна , сколько элементов нужно переместить
      */
     @Override
-    public void add(Car car, int index) {
+    public boolean add(Car car, int index) {
         increaseArray();
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
@@ -46,6 +47,7 @@ public class CarArrayList implements CarList {
         System.arraycopy(cars, index, cars, index + 1, size - index);
         cars[index] = car;
         size++;
+        return true;
     }
 
     @Override
@@ -57,6 +59,17 @@ public class CarArrayList implements CarList {
         }
         return false;
     }
+
+    @Override
+    public boolean contains(Car car) {
+        for (int i = 0; i < size; i++) {
+            if (cars[i].equals(car)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public boolean removeAt(int index) {
@@ -76,6 +89,8 @@ public class CarArrayList implements CarList {
         cars = new Car[10];
         size = 0;
     }
+
+
 
     private void checkIndex(int index) {
         if (index < 0 || index >= size) {

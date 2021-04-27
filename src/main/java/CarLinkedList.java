@@ -10,7 +10,7 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
-    public void add(Car car) {
+    public boolean add(Car car) {
         if (size == 0) {
             first = new Node(null, car, null);
             last = first;
@@ -20,16 +20,16 @@ public class CarLinkedList implements CarList {
             secondLast.next = last;
         }
         size++;
+        return true;
     }
 
     @Override
-    public void add(Car car, int index) {
+    public boolean add(Car car, int index) {
         if (index < 0 || index > size) { // проверяем индекс если за пределами коллекции то бросаем исключение
             throw new IndexOutOfBoundsException();
         }
         if (index == size) { // если индекс равен размеру коллекции вставляем объект в конец
-            add(car);
-            return;
+            return add(car);
         }
         Node nodeNext = getNode(index); // индекс не является последним элементом, нужно получить ссылки на соседние
         Node nodePrevious = nodeNext.previous; // получаем ссылки на предыдущий элемент, обратившись к переменной previous у предыдущего элемента
@@ -44,19 +44,29 @@ public class CarLinkedList implements CarList {
 
         }
         size++;
+        return true;
     }
 
     @Override
     public boolean remove(Car car) {
+       int index = findElement(car);
+       if (index != -1) {
+           return removeAt(index);
+       }
+       return false;
+    }
+
+    private int findElement(Car car) {
         Node node = first;
         for (int i = 0; i < size; i++) {
-            if(node.value.equals(car)) {
-              return removeAt(i);
+            if (node.value.equals(car)) {
+                return i;
             }
             node = node.next;
         }
-        return false;
+        return -1;
     }
+
 
     @Override
     public boolean removeAt(int index) {
@@ -88,6 +98,13 @@ public class CarLinkedList implements CarList {
         last = null;
         size = 0;
     }
+
+    @Override
+    public boolean contains(Car car) {
+        return findElement(car) != -1;
+
+    }
+
 
     // у первого элемента будет вызван метод next, в итоге получим элемент по нужному индексу
     private Node getNode(int index) {

@@ -1,3 +1,5 @@
+
+
 public class CarHashSet implements CarSet {
 
     private int size = 0;
@@ -75,6 +77,31 @@ public class CarHashSet implements CarSet {
         array = new Entry[INITIAL_CAPACITY];
         size = 0;
     }
+
+    @Override
+    public boolean contains(Car car) {
+        int position = getElementPosition(car, array.length);
+        if (array[position] == null) {
+            return false;
+        }
+        Entry secondLast = array[position];
+        Entry last = secondLast.next;
+        if (secondLast.value.equals(car)) {
+
+            return true;
+        }
+        while (last != null) {
+            if (last.value.equals(car)) {
+
+                return true;
+            } else {
+
+                last = last.next;
+            }
+        }
+        return false;
+    }
+
 
     private void increaseArray() {
         Entry[] newArray = new Entry[array.length * 2];

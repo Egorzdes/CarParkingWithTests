@@ -21,7 +21,7 @@ public class CarSetTest {
 //        assertTrue(carSet.add(new Car("BMW", 8)));
 //        assertFalse(carSet.add(new Car("BMW", 8)));
 //        assertFalse(carSet.add(new Car("BMW", 8)));
-//        assertEquals(101, carSet.size());
+//        assertEquals(100, carSet.size());
 //    }
 
     @Test
@@ -33,7 +33,7 @@ public class CarSetTest {
 //    @Test
 //    public void whenElementRemovedThenSizeDecreased() {
 //        assertTrue(carSet.remove(new Car("Brand1", 33)));
-//        assertEquals(99, carSet.size());
+//        assertEquals(100, carSet.size());
 //        assertFalse(carSet.remove(new Car("Brand1", 33)));
 //        assertEquals(99, carSet.size());
 //    }
