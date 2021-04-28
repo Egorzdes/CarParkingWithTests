@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class CarArrayList implements CarList {
 
@@ -102,5 +103,22 @@ public class CarArrayList implements CarList {
         if (size >= cars.length) {
             cars = Arrays.copyOf(cars, cars.length * 2);
         }
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public Car next() {
+                return cars[index++];
+            }
+        };
     }
 }
